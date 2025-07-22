@@ -77,7 +77,21 @@ class VulcanScanner:
             True if port is open, False otherwise
         """
         try:
-            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+True if port is open, False otherwise
+        """
+        try:
+            if not hasattr(self, '_socket'):
+                self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                self._socket.settimeout(self.timeout)
+            
+            result = self._socket.connect_ex((self.target, port))
+            is_open = result == 0
+            if is_open and self.verbose:
+                self.logger.debug(f"Port {port} is open")
+            return is_open
+        except (socket.timeout, ConnectionRefusedError) as e:
+            self.logger.debug(f"Error checking port {port}: {e}")
+            return False
                 s.settimeout(self.timeout)
                 result = s.connect_ex((self.target, port))
                 is_open = result == 0
