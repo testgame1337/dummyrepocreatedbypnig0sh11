@@ -1,0 +1,31 @@
+# Vulcan Configuration File
+
+# Logging configuration
+log_level: INFO
+log_file: ~/.vulcan/logs/vulcan.log
+
+# Output format (json, yaml, csv)
+output_format: json
+
+# Data directory
+data_dir: ~/.vulcan/data
+
+# Task-specific configuration
+tasks:
+  system_check:
+    detailed: true
+  
+  disk_usage:
+    path: /
+    
+  custom_task:
+    param1: value1
+    param2: value2
+
+# Custom settings
+custom:
+  setting1: value1
+  setting2: value2
+  nested:
+    key1: value1
+    key2: value2
